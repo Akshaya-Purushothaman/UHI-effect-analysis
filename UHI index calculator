@@ -1,0 +1,35 @@
+import pandas as pd
+temperature_predictions=pd.read_csv("combined_temperatures.csv")
+temp = pd.Series(temperature_predictions['Current Temp'])
+future_temp=pd.Series(temperature_predictions["Pretidicted Temperature"])
+
+data = {
+    'zone': ['Adyar', 'Anna Nagar', 'Tondiarpet', 'Royapuram', 'Kodambakkam', 'Alandur', 'Perungudi', 'Valasaravakkam', 'Manali', 'Teynampet', 'Sholinganallur', 'Thiru. Vi. Ka. Nagar', 'Ambattur', 'Madhavaram'],
+    'Current Temperature': [i for i in temp],
+    'Future Temperature': [x for x in future_temp],
+    'Water Bodies Percentage': [23.40, 19.41, 19.17, 23.85, 35.83, 39.04, 48.71, 21.37, 32.75, 31.88, 63.03, 40.15, 64.67, 61.34],
+    'Green Area Percentage': [29.46, 0.82, 0.14, 0.28, 0.13, 1.08, 0.01, 23.34, 1.28, 0.02, 0.01, 0.45, 1.27, 1.55],
+    'Building Density Percentage': [47.42, 79.80, 80.76, 76.08, 64.09, 59.89, 51.35, 55.33, 66.00, 68.41, 37.27, 59.48, 34.12, 37.11]
+}
+
+df = pd.DataFrame(data)
+
+df['Temp Difference'] = df['Future Temperature'] - df['Current Temperature']
+
+df['Norm Water Bodies'] = df['Water Bodies Percentage'] / df['Water Bodies Percentage'].max()
+df['Norm Green Area'] = df['Green Area Percentage'] / df['Green Area Percentage'].max()
+df['Norm Building Density'] = df['Building Density Percentage'] / df['Building Density Percentage'].max()
+
+
+weight_water_bodies = -1  
+weight_green_area = -1    
+weight_building_density = 1 
+
+df['uhi_index'] = df['Temp Difference'] + (weight_water_bodies * df['Norm Water Bodies']) + \
+                   (weight_green_area * df['Norm Green Area']) + \
+                   (weight_building_density * df['Norm Building Density'])
+
+for index, row in df.iterrows():
+    print(f"Zone: {row['zone']}, UHI Index: {row['uhi_index']:.2f}")
+uhi_values_df = df[['zone', 'Water Bodies Percentage', 'Green Area Percentage', 'Building Density Percentage', 'uhi_index']]
+uhi_values_df.to_csv('finaluhivalue.csv', index=False)
