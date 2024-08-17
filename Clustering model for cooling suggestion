@@ -1,0 +1,30 @@
+def generate_cluster_recommendations(cluster):
+    recommendations = []
+
+    if cluster == 0:
+        recommendations.append("1. Increase Green Spaces: Develop new parks and green belts, and enhance existing urban green spaces to improve vegetation and lower temperatures.")
+        recommendations.append("2. Implement Cool Roofing Materials: Use reflective or cool roofing materials to reduce heat absorption in buildings and lower indoor temperatures.")
+        recommendations.append("3. Promote Green Roofs and Walls: Integrate green roofs and vertical gardens to cool building surfaces and improve urban air quality.")
+        recommendations.append("4. Introduce Water Features: Add water bodies such as fountains or ponds in urban areas to enhance cooling effects and mitigate heat.")
+        recommendations.append("5. Encourage Energy-Efficient Buildings: Adopt energy-efficient design and construction practices to reduce overall heat emissions from buildings.")
+
+    elif cluster == 1:
+        recommendations.append("1. Maintain and Expand Green Areas: Continue to nurture and expand existing green spaces to sustain their cooling benefits.")
+        recommendations.append("2. Enhance and Preserve Water Bodies: Focus on maintaining and improving water bodies to ensure they continue to provide cooling effects.")
+        recommendations.append("3. Utilize Cool Pavements: Implement reflective or cool pavements for roads and walkways to reduce heat absorption.")
+        recommendations.append("4. Adopt Energy-Efficient Building Practices: Further promote energy-efficient building practices to decrease heat production and consumption.")
+
+    elif cluster == 2:
+        recommendations.append("1. Increase Green Spaces: Expand urban green areas by creating new parks, planting additional trees, and developing green belts.")
+        recommendations.append("2. Expand Water Bodies: Introduce more water features and increase the percentage of water bodies in urban areas to enhance cooling effects.")
+        recommendations.append("3. Implement Cool Roofing and Pavements: Use cool roofing materials and pavements to minimize heat absorption and reduce overall temperatures.")
+        recommendations.append("4. Encourage Building Modifications: Upgrade existing buildings with energy-efficient materials and design modifications to minimize heat generation.")
+        recommendations.append("5. Promote Urban Greening Projects: Support and invest in urban greening initiatives to boost vegetation and improve air quality.")
+
+    return recommendations
+
+cluster = 1  
+recommendations = generate_cluster_recommendations(cluster)
+print("Recommendations:")
+for rec in recommendations:
+    print(f"- {rec}")
