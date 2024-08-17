@@ -1,0 +1,74 @@
+import osmnx as ox
+import geopandas as gpd
+import pandas as pd
+from shapely.geometry import box
+
+def fetch_data_from_bbox(bbox):
+    try:
+        polygon = box(*bbox)
+        
+        print(f"Fetching data within bbox: {bbox}")
+        
+        water_gdf = ox.features_from_polygon(polygon, tags={'natural': 'water'})
+        green_gdf = ox.features_from_polygon(polygon, tags={'landuse': ['park', 'forest'], 'natural': ['wood']})
+        buildings_gdf = ox.features_from_polygon(polygon, tags={'building': True})
+        
+        return water_gdf, green_gdf, buildings_gdf
+    except Exception as e:
+        print(f"Error fetching data from bbox: {e}")
+        return gpd.GeoDataFrame(), gpd.GeoDataFrame(), gpd.GeoDataFrame()
+
+def analyze_data(zone_name, bbox):
+    print(f"Analyzing {zone_name}...")
+    
+    try:
+        water_gdf, green_gdf, buildings_gdf = fetch_data_from_bbox(bbox)
+
+        if water_gdf.empty and green_gdf.empty and buildings_gdf.empty:
+            print(f"No data found for {zone_name}.")
+            print(f"Water Bodies Percentage in {zone_name}: 0.00%")
+            print(f"Green Area Percentage in {zone_name}: 0.00%")
+            print(f"Building Density Percentage in {zone_name}: 0.00%")
+            return
+        combined_gdf = gpd.GeoDataFrame(pd.concat([water_gdf, green_gdf, buildings_gdf], ignore_index=True))
+        if combined_gdf.empty:
+            print(f"Combined data is empty for {zone_name}.")
+            print(f"Water Bodies Percentage in {zone_name}: 0.00%")
+            print(f"Green Area Percentage in {zone_name}: 0.00%")
+            print(f"Building Density Percentage in {zone_name}: 0.00%")
+            return
+
+        total_area = combined_gdf.unary_union.area
+
+        water_area = water_gdf.area.sum() if not water_gdf.empty else 0
+        green_area = green_gdf.area.sum() if not green_gdf.empty else 0
+        building_area = buildings_gdf.area.sum() if not buildings_gdf.empty else 0
+
+        water_percentage = (water_area / total_area) * 100 if total_area > 0 else 0
+        green_percentage = (green_area / total_area) * 100 if total_area > 0 else 0
+        building_percentage = (building_area / total_area) * 100 if total_area > 0 else 0
+
+        print(f"{zone_name}:")
+        print(f"  Water Bodies Percentage: {water_percentage:.2f}%")
+        print(f"  Green Area Percentage: {green_percentage:.2f}%")
+        print(f"  Building Density Percentage: {building_percentage:.2f}%")
+        print()
+
+    except Exception as e:
+        print(f"Error analyzing {zone_name}: {e}")
+        print(f"Water Bodies Percentage in {zone_name}: 0.00%")
+        print(f"Green Area Percentage in {zone_name}: 0.00%")
+        print(f"Building Density Percentage in {zone_name}: 0.00%")
+
+zones_bboxes = {
+    "Valasaravakkam": [80.193, 13.0, 80.243, 13.05],
+    "Manali": [80.200, 13.120, 80.240, 13.160],         
+    "Teynampet": [80.235, 13.055, 80.265, 13.085],
+    "Sholinganallur": [80.2079666627, 12.8521343241, 80.2634552773, 12.9587060909],  
+    "Thiru. Vi. Ka. Nagar": [80.265, 13.065, 80.295, 13.095],
+    "Ambattur": [80.185, 13.105, 80.215, 13.135],
+    "Madhavaram": [80.237, 13.130, 80.267, 13.160]
+}
+
+for zone_name, bbox in zones_bboxes.items():
+    analyze_data(zone_name, bbox)
