@@ -1,0 +1,33 @@
+import pandas as pd
+import os
+files = [
+    'Adyar.csv', 'AnnaNagar.csv', 'Tondiarpet.csv', 'Royapuram.csv', 'Kodambakkam.csv',
+    'Alandur.csv', 'Perungudi.csv', 'valasaravakkam.csv', 'Manali.csv', 'Teynampet.csv',
+    'Sholinganallur.csv', 'ThiruViKaNagar.csv', 'Ambattur.csv', 'madhavaram.csv'
+]
+
+data = []
+
+def extract_last_row_temp(file):
+    try:
+        # Load the dataset
+        df = pd.read_csv(file)
+        
+        if 'temp' not in df.columns:
+            print(f"File {file} is missing the 'Temp' column.")
+            return
+        
+        last_row = df.iloc[-1]
+
+        temperature = last_row['temp']
+        place_name = os.path.splitext(os.path.basename(file))[0]
+        data.append({'Place': place_name, 'Current Temp': temperature})
+    
+    except Exception as e:
+        print(f"Error processing file {file}: {e}")
+for file in files:
+    extract_last_row_temp(file)
+result_df = pd.DataFrame(data)
+result_df.to_csv('combined_temperatures.csv', index=False)
+
+print("Data has been written to 'combined_temperatures.csv'")
