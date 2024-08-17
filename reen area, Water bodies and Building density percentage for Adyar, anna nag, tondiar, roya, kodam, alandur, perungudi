@@ -1,0 +1,54 @@
+import osmnx as ox
+import geopandas as gpd
+import pandas as pd
+
+zones = {
+    "Adyar": "Adyar, Chennai, India",
+    "Anna Nagar": "Anna Nagar, Chennai, India",
+    "Tondiarpet": "Tondiarpet, Chennai, India",
+    "Zone 5 Royapuram": "Zone 5 Royapuram, Chennai, India",
+    "Kodambakkam": "Kodambakkam, Chennai, India",
+    "Alandur": "Alandur, Chennai, India",
+    "Perungudi": "Perungudi, Chennai, India"
+}
+
+def analyze_zone(zone_name, place_query):
+    print(f"Analyzing {zone_name}...")
+    
+    try:
+        #OSMnx API
+        water_gdf = ox.features_from_place(place_query, tags={'water': True})
+        green_gdf = ox.features_from_place(place_query, tags={'landuse': ['park', 'forest'], 'natural': ['wood']})
+        buildings_gdf = ox.features_from_place(place_query, tags={'building': True})
+
+        if water_gdf.empty and green_gdf.empty and buildings_gdf.empty:
+            print(f"No data found for {zone_name}.")
+            return
+
+        combined_gdf = gpd.GeoDataFrame(pd.concat([water_gdf, green_gdf, buildings_gdf], ignore_index=True))
+        if combined_gdf.empty:
+            print(f"Combined data is empty for {zone_name}.")
+            return
+
+        total_area = combined_gdf.unary_union.area
+
+        water_area = water_gdf.area.sum() if not water_gdf.empty else 0
+        green_area = green_gdf.area.sum() if not green_gdf.empty else 0
+        building_area = buildings_gdf.area.sum() if not buildings_gdf.empty else 0
+
+        water_percentage = (water_area / total_area) * 100 if total_area > 0 else 0
+        green_percentage = (green_area / total_area) * 100 if total_area > 0 else 0
+        building_percentage = (building_area / total_area) * 100 if total_area > 0 else 0
+
+        print(f"{zone_name}:")
+        print(f"  Water Bodies Percentage: {water_percentage:.2f}%")
+        print(f"  Green Area Percentage: {green_percentage:.2f}%")
+        print(f"  Building Density Percentage: {building_percentage:.2f}%")
+        print()
+
+    except Exception as e:
+        print(f"Error analyzing {zone_name}: {e}")
+
+
+for zone_name, place_query in zones.items():
+    analyze_zone(zone_name, place_query)
