@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script>
+        L_NO_TOUCH = false;
+        L_DISABLE_3D = false;
+    </script>
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: linear-gradient(to bottom right, #2c3e50, #3498db);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        #heading-container {
+            text-align: center;
+            margin: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        #heading {
+            font-size: 2.5rem;
+            color: #ecf0f1;
+            text-shadow: 2px 2px #2c3e50;
+        }
+        #content {
+            font-size: 1.2rem;
+            color: #ecf0f1;
+            margin-top: 10px;
+        }
+        .container {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .map-container {
+            width: 60%;
+            height: 70vh;
+            margin: 20px;
+            border: 3px solid #ecf0f1;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+        #map {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+        }
+        #links {
+            width: 30%;
+            padding: 20px;
+            background: #2980b9;
+            color: white;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+        #links a {
+            color: white;
+            text-decoration: none;
+            margin: 10px 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        #links a:hover {
+            color: #ecf0f1;
+            text-decoration: underline;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+</head>
+<body>
+    <div id="heading-container">
+        <div id="heading">Urban Heat Island Effect Mitigation</div><br>
+        <div id="content">
+            Urban Heat Island (UHI) effect refers to the phenomenon where urban areas experience higher temperatures than their rural surroundings. This is primarily due to human activities and alterations to the natural environment, such as increased building density, reduced green spaces, and higher pollution levels. Our goal is to visualize and mitigate the impact of UHI through this map, which provides real-time temperature data for various areas, helping city planners and policymakers implement effective cooling strategies.
+        </div><br>
+    </div>
+    <div class="container">
+        <div class="map-container">
+            <div id="map"></div>
+        </div>
+        <div id="links">
+            <a href="heat2.html">Heat Spot Analysis</a>
+            <a href="future temperature2.html">Future Temperature</a>
+            <a href="cool3.html">Reasons and Cooling Suggestions</a>
+	    <a href="home2.html">Home</a>
+        </div>
+    </div>
+
+    <script>
+        var map = L.map("map", {
+            center: [13.0827, 80.2707],
+            crs: L.CRS.EPSG3857,
+            zoom: 12,
+            zoomControl: true,
+            preferCanvas: false,
+        });
+
+        L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            attribution: "&copy; OpenStreetMap contributors",
+            maxZoom: 19,
+            minZoom: 0,
+        }).addTo(map);
+
+        const apiKey = '74abe5b687652d9cc07ad6602aa74277';
+
+        const areas = [
+            { name: "Guindy", lat: 13.0108, lon: 80.2127 },
+            { name: "Anna Nagar", lat: 13.0866, lon: 80.2209 },
+            { name: "Valasaravakkam", lat: 13.0482, lon: 80.1763 },
+            { name: "Kodambakkam", lat: 13.0493, lon: 80.2337 },
+            { name: "Sholinganallur", lat: 12.8893, lon: 80.2296 },
+            { name: "Adyar", lat: 13.0067, lon: 80.2578 },
+            { name: "Madhavaram", lat: 13.1545, lon: 80.2325 },
+            { name: "Tondiarpet", lat: 13.1213, lon: 80.2822 },
+            { name: "Perungudi", lat: 12.9626, lon: 80.2398 },
+            { name: "Alandur", lat: 13.0034, lon: 80.2074 }
+        ];
+
+        function getColor(temp) {
+            if (temp < 20) {
+                return '#27ae60';
+            } else if (temp >= 20 && temp < 32) {
+                return '#f39c12';
+            } else {
+                return '#e74c3c';
+            }
+        }
+
+        function getWeatherData() {
+            areas.forEach(area => {
+                const url = `https://api.openweathermap.org/data/2.5/weather?lat=${area.lat}&lon=${area.lon}&appid=${apiKey}&units=metric`;
+                $.getJSON(url, function(data) {
+                    const temp = data.main.temp;
+                    const color = getColor(temp);
+                    const marker = L.circleMarker([area.lat, area.lon], {
+                        color: color,
+                        fillColor: color,
+                        fillOpacity: 0.7,
+                        radius: 10,
+                        weight: 2
+                    }).addTo(map);
+
+                    marker.bindTooltip(
+                        `<div>${area.name}: ${temp}°C</div>`,
+                        { sticky: true }
+                    );
+                });
+            });
+        }
+
+        getWeatherData();
+    </script>
+</body>
+</html>
+

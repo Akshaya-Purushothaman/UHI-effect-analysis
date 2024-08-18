@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UHI Solutions Table</title>
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: linear-gradient(to bottom right, #2c3e50, #3498db);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        header {
+            text-align: center;
+            margin: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: #ecf0f1;
+            text-shadow: 2px 2px #2c3e50;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            width: 100%;
+            padding: 20px;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+            width: 70%;
+        }
+
+        main h2 {
+            font-size: 2rem;
+            color: #ecf0f1;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        table th, table td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ecf0f1;
+            color: #ecf0f1;
+        }
+
+        table th {
+            background-color: #2980b9;
+            text-transform: uppercase;
+        }
+
+        table td {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        table tbody tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .cluster-summary {
+            color: #ecf0f1;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: left;
+            line-height: 1.6;
+        }
+
+        .cluster-summary h3 {
+            color: white;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .cluster-summary ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .cluster-summary ul li {
+            margin-bottom: 10px;
+        }
+
+        .recommendation {
+            background: rgba(52, 152, 219, 0.2);
+            padding: 10px;
+            border-left: 4px solid #2980b9;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+
+        .recommendation strong {
+            color: white;
+        }
+
+        #links {
+            margin-left: 20px;
+            width: 300px;
+            padding: 20px;
+            background: #2980b9;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            height: fit-content;
+        }
+
+        #links a {
+            color: white;
+            text-decoration: none;
+            margin: 10px 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: color 0.3s;
+            text-align: center;
+        }
+
+        #links a:hover {
+            color: #ecf0f1;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Urban Heat Island Effect Mitigation</h1>
+    </header>
+
+    <div class="container">
+        <main>
+            <h2>UHI Data Table</h2>
+
+            <table border="1" class="dataframe">
+                <thead>
+                    <tr>
+                        <th>Index</th>
+                        <th>Area</th>
+                        <th>Building Density (%)</th>
+                        <th>Green Area (%)</th>
+                        <th>Water Bodies (%)</th>
+                        <th>UHI Index</th>
+                        <th>Effect</th> <!-- New column header -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>0</td>
+                        <td>adyar</td>
+                        <td>47.42</td>
+                        <td>29.46</td>
+                        <td>23.40</td>
+                        <td>-0.45</td>
+                        <td>High</td> <!-- New column data -->
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>anna nagar</td>
+                        <td>79.80</td>
+                        <td>0.82</td>
+                        <td>19.41</td>
+                        <td>1.02</td>
+                        <td>Low</td> <!-- New column data -->
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>tondiarpet</td>
+                        <td>80.76</td>
+                        <td>0.14</td>
+                        <td>19.17</td>
+                        <td>1.02</td>
+                        <td>Low</td> <!-- New column data -->
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>royapuram</td>
+                        <td>76.08</td>
+                        <td>0.28</td>
+                        <td>23.85</td>
+                        <td>1.00</td>
+                        <td>Low</td> <!-- New column data -->
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>kodampakkam</td>
+                        <td>64.09</td>
+                        <td>0.13</td>
+                        <td>35.83</td>
+                        <td>0.38</td>
+                        <td>Low</td> <!-- New column data -->
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>alandur</td>
+                        <td>59.89</td>
+                        <td>1.08</td>
+                        <td>39.04</td>
+                        <td>0.36</td>
+                        <td>Low</td> <!-- New column data -->
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>perungudi</td>
+                        <td>51.35</td>
+                        <td>0.01</td>
+                        <td>48.71</td>
+                        <td>0.04</td>
+                        <td>Low</td> <!-- New column data -->
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>valasaravakkam</td>
+                        <td>55.33</td>
+                        <td>23.34</td>
+                        <td>21.37</td>
+                        <td>-0.30</td>
+                        <td>High</td> <!-- New column data -->
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>manali</td>
+                        <td>66.00</td>
+                        <td>32.75</td>
+                        <td>32.75</td>
+                        <td>1.70</td>
+                        <td>Low</td> <!-- New column data -->
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>teynampet</td>
+                        <td>68.41</td>
+                        <td>1.28</td>
+                        <td>31.88</td>
+                        <td>0.74</td>
+                        <td>Low</td> <!-- New column data -->
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>sholinganallur</td>
+                        <td>37.27</td>
+                        <td>0.01</td>
+                        <td>63.03</td>
+                        <td>-0.35</td>
+                        <td>High</td> <!-- New column data -->
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>thiruvikanagar</td>
+                        <td>59.48</td>
+                        <td>0.45</td>
+                        <td>40.15</td>
+                        <td>0.44</td>
+                        <td>Low</td> <!-- New column data -->
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td>ambattur</td>
+                        <td>34.12</td>
+                        <td>1.27</td>
+                        <td>64.67</td>
+                        <td>-0.25</td>
+                        <td>High</td> <!-- New column data -->
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <td>madhavaram</td>
+                        <td>37.11</td>
+                        <td>1.55</td>
+                        <td>61.34</td>
+                        <td>-0.15</td>
+                        <td>High</td> <!-- New column data -->
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="cluster-summary">
+                <h3>Cluster Summary</h3>
+                <ul>
+                    <li><strong>Cluster 1:</strong> High Building Density (e.g., Anna Nagar, Tondiarpet, Royapuram) - UHI Index close to 1.0</li>
+                    <li><strong>Cluster 2:</strong> Moderate Building Density with Higher Green Areas (e.g., Adyar, Valasaravakkam, Thiruvikanagar) - UHI Index around 0.0</li>
+                    <li><strong>Cluster 3:</strong> Low Building Density with High Water Bodies (e.g., Perungudi, Sholinganallur) - UHI Index slightly below 0.0</li>
+                </ul>
+            </div>
+        </main>
+
+        <aside id="links">
+            <a href="heat2.html">Heat Spot Analysis</a>
+            <a href="future temperature2.html">Future Temperature</a>
+            <a href="cool3.html">Reason and Cooling suggestions</a>
+            <a href="home2.html">Home</a>
+        </aside>
+    </div>
+</body>
+
+</html>

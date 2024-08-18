@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UHI Solutions Table</title>
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: linear-gradient(to bottom right, #2c3e50, #3498db);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        header {
+            text-align: center;
+            margin: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: #ecf0f1;
+            text-shadow: 2px 2px #2c3e50;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            width: 100%;
+            padding: 20px;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+            width: 70%;
+        }
+
+        main h2 {
+            font-size: 2rem;
+            color: #ecf0f1;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        table th, table td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ecf0f1;
+            color: #ecf0f1;
+        }
+
+        table th {
+            background-color: #2980b9;
+            text-transform: uppercase;
+        }
+
+        table td {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        table tbody tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .cluster-summary {
+            color: #ecf0f1;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: left;
+            line-height: 1.6;
+        }
+
+        .cluster-summary h3 {
+            color: white;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .cluster-summary ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .cluster-summary ul li {
+            margin-bottom: 10px;
+        }
+
+        .recommendation {
+            background: rgba(52, 152, 219, 0.2);
+            padding: 10px;
+            border-left: 4px solid #2980b9;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+
+        .recommendation strong {
+            color: white;
+        }
+
+        #links {
+            width: 30%;
+            padding: 20px;
+            background: #2980b9;
+            color: white;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        #links a {
+            color: white;
+            text-decoration: none;
+            margin: 10px 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: color 0.3s;
+            text-align: center;
+        }
+
+        #links a:hover {
+            color: #ecf0f1;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Reason and Solutions for UHI</h1>
+    </header>
+
+    <div class="container">
+        <main>
+            <div class="cluster-summary">
+                <h3>Cluster Summary</h3>
+                <ul>
+                    <li><strong>Cluster 0:</strong> High Building Density (~70%), Low Green Area (~60%), Low Water Bodies (~30%), UHI Index: Slightly Negative (-0.32)</li>
+                    <li><strong>Cluster 1:</strong> Very Low Building Density (~40%), High Green Area (~71%), High Water Bodies (~59%), UHI Index: Very Negative (-0.98)</li>
+                    <li><strong>Cluster 2:</strong> Moderate Building Density (~56%), Very Low Green Area (~29%), Moderate Water Bodies (~26%), UHI Index: Positive (1.78)</li>
+                </ul>
+            </div>
+
+            <div class="cluster-summary">
+                <h3>Recommendations for Each Cluster</h3>
+
+                <h4>Cluster 0: High Building Density, Low Green Area, Low Water Bodies</h4>
+                <div class="recommendation">
+                    <strong>Increase Green Spaces:</strong> Develop more parks, plant trees, and create community gardens. <br><em>Reason:</em> Enhancing green coverage can reduce heat absorption and increase cooling.
+                </div>
+                <div class="recommendation">
+                    <strong>Introduce Cool Roofing Materials:</strong> Use reflective or cool roofing materials to reduce heat absorption from roofs. <br><em>Reason:</em> These materials help lower surface temperatures and reduce heat gain.
+                </div>
+                <div class="recommendation">
+                    <strong>Implement Green Roofs and Walls:</strong> Encourage or mandate green roofs and vertical gardens in new buildings. <br><em>Reason:</em> These can help absorb heat and improve insulation.
+                </div>
+                <div class="recommendation">
+                    <strong>Increase Water Features:</strong> Develop small water bodies or fountains in public spaces. <br><em>Reason:</em> Water bodies can enhance local cooling and increase humidity.
+                </div>
+
+                <h4>Cluster 1: Low Building Density, High Green Area, High Water Bodies</h4>
+                <div class="recommendation">
+                    <strong>Maintain Current Conditions:</strong> Continue to maintain and expand existing green spaces and water bodies. <br><em>Reason:</em> The high green area and water bodies are contributing to a very low UHI effect.
+                </div>
+                <div class="recommendation">
+                    <strong>Promote Sustainable Practices:</strong> Encourage sustainable urban practices and green building certifications. <br><em>Reason:</em> Maintaining high green coverage and water bodies will sustain low UHI effects.
+                </div>
+
+                <h4>Cluster 2: Moderate Building Density, Very Low Green Area, Moderate Water Bodies</h4>
+                <div class="recommendation">
+                    <strong>Increase Green Area:</strong> Introduce green roofs, urban parks, and increase tree planting. <br><em>Reason:</em> Significant improvement in UHI index is needed, and increasing green space will help mitigate heat.
+                </div>
+                <div class="recommendation">
+                    <strong>Use Cool Materials:</strong> Implement cool pavements and reflective building materials. <br><em>Reason:</em> These materials can reduce heat absorption from surfaces and buildings.
+                </div>
+                <div class="recommendation">
+                    <strong>Enhance Water Features:</strong> Improve and expand water bodies and introduce more water features. <br><em>Reason:</em> More water bodies can provide cooling benefits and enhance local humidity.
+                </div>
+            </div>
+
+            <table border="1" class="dataframe">
+                <thead>
+                    <tr style="text-align: right;">
+                        <th>Area</th>
+                        <th>Cluster</th>
+                        <th>Recommendations</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>adyar</td>
+                        <td>2</td>
+                        <td>1. Increase green areas through parks, green roofs, and urban gardens.
+                            2. Use cool materials for pavements and building surfaces.
+                            3. Enhance and expand water features.</td>
+                    </tr>
+                    <tr>
+                        <td>anna nagar</td>
+                        <td>0</td>
+                        <td>1. Increase green spaces by developing parks and planting trees.
+                            2. Use cool roofing materials to reduce heat absorption.
+                            3. Implement green roofs and walls on buildings.
+                            4. Introduce water features like fountains or small ponds.</td>
+                    </tr>
+                    <tr>
+                        <td>tondiarpet</td>
+                        <td>0</td>
+                        <td>1. Increase green spaces by developing parks and planting trees.
+                            2. Use cool roofing materials to reduce heat absorption.
+                            3. Implement green roofs and walls on buildings.
+                            4. Introduce water features like fountains or small ponds.</td>
+                    </tr>
+                    <tr>
+                        <td>madhavaram</td>
+                        <td>2</td>
+                        <td>1. Increase green areas through parks, green roofs, and urban gardens.
+                            2. Use cool materials for pavements and building surfaces.
+                            3. Enhance and expand water features.</td>
+                    </tr>
+                    <tr>
+                        <td>kodambakkam</td>
+                        <td>0</td>
+                        <td>1. Increase green spaces by developing parks and planting trees.
+                            2. Use cool roofing materials to reduce heat absorption.
+                            3. Implement green roofs and walls on buildings.
+                            4. Introduce water features like fountains or small ponds.</td>
+                    </tr>
+                    <tr>
+                        <td>perungudi</td>
+                        <td>2</td>
+                        <td>1. Increase green areas through parks, green roofs, and urban gardens.
+                            2. Use cool materials for pavements and building surfaces.
+                            3. Enhance and expand water features.</td>
+                    </tr>
+                    <tr>
+                        <td>sholinganallur</td>
+                        <td>2</td>
+                        <td>1. Increase green areas through parks, green roofs, and urban gardens.
+                            2. Use cool materials for pavements and building surfaces.
+                            3. Enhance and expand water features.</td>
+                    </tr>
+                    <tr>
+                        <td>guindy</td>
+                        <td>0</td>
+                        <td>1. Increase green spaces by developing parks and planting trees.
+                            2. Use cool roofing materials to reduce heat absorption.
+                            3. Implement green roofs and walls on buildings.
+                            4. Introduce water features like fountains or small ponds.</td>
+                    </tr>
+                    <tr>
+                        <td>valasaravakkam</td>
+                        <td>0</td>
+                        <td>1. Increase green spaces by developing parks and planting trees.
+                            2. Use cool roofing materials to reduce heat absorption.
+                            3. Implement green roofs and walls on buildings.
+                            4. Introduce water features like fountains or small ponds.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+
+        <aside id="links">
+            <a href="heat2.html">Heat Spot Analysis</a>
+            <a href="future temperature2.html">Future Temperature</a>
+            <a href="cool3.html">Reasons and Cooling Suggestions</a>
+            <a href="home2.html">Home</a>
+        </aside>
+    </div>
+</body>
+
+</html>
